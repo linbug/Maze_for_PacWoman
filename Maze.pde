@@ -9,7 +9,7 @@ class Maze {
   }
   
   void display(){
-    fill (255);
+    fill (#009B95);
     rect (x, y, blockWidth, blockHeight);
   }
 }

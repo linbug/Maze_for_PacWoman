@@ -5,6 +5,11 @@ class Pac {
   circleY, 
   bottomLip=PI/6, 
   topLip = 11*PI/6;
+  boolean 
+    up_left = false, 
+  up_right = false, 
+  down_left = false, 
+  down_right = false;
 
   Pac (float x, float y, int z, int speed) {
     circleX = x; 
@@ -23,6 +28,7 @@ class Pac {
         bottomLip = 7*PI/6; 
         topLip = 17*PI/6;
         circleX-=gridSpacing;
+        //up_left = collisionMap[circleX - gridSpacing - circleWidth][circleY - gridSpacing];
       } 
       else if (keyCode == RIGHT) {
         topLip = 11*PI/6; 

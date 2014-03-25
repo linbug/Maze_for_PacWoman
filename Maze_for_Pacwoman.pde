@@ -15,16 +15,16 @@ void setup() {
   size(mapSize+2*borderSize, mapSize+2*borderSize);
   woman = new Pac (mapSize/2, mapSize/2, gridSize, speed);
   maze = new Maze (width/2, height/2, 30, 10);
-  makeFoods();
-  colMapImage = loadImage("level_image.jpg");
+  colMapImage = loadImage("level_image3.jpg");
   collisionArray();
+  makeFoods();
 }
 
 void makeFoods() {
   foods = new ArrayList<Food>();
   for (int x = borderSize; x<mapSize+borderSize; x+= gridSize) {
     for (int y = borderSize; y< mapSize+borderSize; y+= gridSize) {
-      if (random(10)<4) {
+      if ((random(10)<4) && (collisionMap[x][y]==true))  {
         foods.add(new Food(x, y));
       }
     }
@@ -32,13 +32,13 @@ void makeFoods() {
 }
 
 void collisionArray() {
-  collisionMap = new boolean[mapSize][mapSize];
+  collisionMap = new boolean[width][height];
   color black = color(0);
   color wall = color(#009B95);
-  
+
   //check the colour of each pixel in collisionMap and assign collisionMap boolean true or false
-  for (int i = 0; i<colMapImage.width; i++) {
-    for (int j = 0; j < colMapImage.height; j++) {
+  for (int i = 0; i<width; i++) {
+    for (int j = 0; j < height; j++) {
       color c = colMapImage.get(i, j);
       if (c==black) {
         collisionMap[i][j] = true;
@@ -58,7 +58,7 @@ void draw() {
   background(255);
   fill(0);
   rect(borderSize-20, borderSize-20, mapSize+40, mapSize+40);
-  image (colMapImage, borderSize, borderSize);
+  image (colMapImage,0,0);
   counter += 0.15;
 
   for (int i=0; i<foods.size(); i++) {
@@ -72,7 +72,14 @@ void draw() {
   woman.isonMap();
   checkIsFoodEaten();
   drawScore();
+  /*if (collisionMap [int (mouseX)][int(mouseY)] == true) {
+    println ("yes");
+  } 
+  else {
+    println ("no");
+  }*/
 }
+
 
 void drawScore() {
   fill(0);

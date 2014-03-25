@@ -48,7 +48,15 @@ class Pac {
         circleY+=gridSpacing;
       }
     }
-  }
+  
+  if (collisionMap [int (circleX)][int(circleY)] == true) {
+    println ("no wall");
+    } 
+  else {
+    println ("wall");
+    }
+  
+}
   void isonMap() {
     if (circleX > mapSize+borderSize) {
       circleX = borderSize;
@@ -64,4 +72,3 @@ class Pac {
     }
   }
 }
-

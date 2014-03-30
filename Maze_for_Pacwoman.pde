@@ -13,7 +13,7 @@ PImage colMapImage;
 
 void setup() {
   size(mapSize+2*borderSize, mapSize+2*borderSize);
-  woman = new Pac (mapSize/2, mapSize/2, gridSize, speed);
+  woman = new Pac (mapSize/3, mapSize/3, gridSize, speed);
   maze = new Maze (width/2, height/2, 30, 10);
   colMapImage = loadImage("level_image3.jpg");
   collisionArray();

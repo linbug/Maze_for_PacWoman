@@ -6,10 +6,7 @@ class Pac {
   bottomLip=PI/6, 
   topLip = 11*PI/6;
   boolean 
-    up_left = false, 
-  up_right = false, 
-  down_left = false, 
-  down_right = false;
+    notBlocked = false;
 
   Pac (float x, float y, int z, int speed) {
     circleX = x; 
@@ -27,36 +24,47 @@ class Pac {
       if (keyCode == LEFT) {
         bottomLip = 7*PI/6; 
         topLip = 17*PI/6;
-        circleX-=gridSpacing;
-        //up_left = collisionMap[circleX - gridSpacing - circleWidth][circleY - gridSpacing];
+        notBlocked = collisionMap[int(circleX -gridSize)][int(circleY)];
+          if (notBlocked) {
+          circleX-=gridSpacing;
+        }
       } 
       else if (keyCode == RIGHT) {
         topLip = 11*PI/6; 
-        bottomLip = PI/6; 
-        circleX+=gridSpacing;
+        bottomLip = PI/6;
+        notBlocked = collisionMap[int(circleX +gridSize)][int(circleY)];
+        if (notBlocked) {
+          circleX+=gridSpacing;
+        }
       }
     }
     if (keyPressed && (key ==CODED)) {
       if (keyCode == UP) {
         bottomLip = 10*PI/6; 
         topLip = 20*PI/6; 
-        circleY-=gridSpacing;
+        notBlocked = collisionMap[int(circleX)][int(circleY-gridSize)];
+        if (notBlocked){
+         circleY-=gridSpacing; 
+        }
+        
       } 
       else if (keyCode == DOWN) {
         bottomLip = 2*PI/3; 
         topLip = 14*PI/6;
+        notBlocked = collisionMap[int(circleX)][int(circleY+gridSize)];
+        if (notBlocked){
         circleY+=gridSpacing;
       }
+      }
     }
-  
-  if (collisionMap [int (circleX)][int(circleY)] == true) {
-    println ("no wall");
+
+    if (collisionMap [int (circleX)][int(circleY)] == true) {
+      println ("no wall");
     } 
-  else {
-    println ("wall");
+    else {
+      println ("wall");
     }
-  
-}
+  }
   void isonMap() {
     if (circleX > mapSize+borderSize) {
       circleX = borderSize;
@@ -72,3 +80,4 @@ class Pac {
     }
   }
 }
+

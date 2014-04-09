@@ -13,7 +13,7 @@ PImage colMapImage;
 
 void setup() {
   size(mapSize+2*borderSize, mapSize+2*borderSize);
-  woman = new Pac (mapSize/3, mapSize/3, gridSize, speed);
+  woman = new Pac (width/4, height/4, gridSize, speed);
   maze = new Maze (width/2, height/2, 30, 10);
   colMapImage = loadImage("level_image3.jpg");
   collisionArray();
@@ -26,6 +26,7 @@ void makeFoods() {
     for (int y = borderSize; y< mapSize+borderSize; y+= gridSize) {
       if ((random(10)<4) && (collisionMap[x][y]==true))  {
         foods.add(new Food(x, y));
+      
       }
     }
   }
@@ -40,12 +41,12 @@ void collisionArray() {
   for (int i = 0; i<width; i++) {
     for (int j = 0; j < height; j++) {
       color c = colMapImage.get(i, j);
-      if (c==black) {
-        collisionMap[i][j] = true;
+      if (c==wall) {
+        collisionMap[i][j] = false;
       }
       else {
-        if (c == wall) {
-          collisionMap [i][j] = false;
+        if (c == black) {
+          collisionMap [i][j] = true;
         }
       }
     }
@@ -66,18 +67,13 @@ void draw() {
     myFood.display();
   }
 
-  maze.display();
+ // maze.display();
   woman.display();
   woman.move();
   woman.isonMap();
   checkIsFoodEaten();
   drawScore();
-  /*if (collisionMap [int (mouseX)][int(mouseY)] == true) {
-    println ("yes");
-  } 
-  else {
-    println ("no");
-  }*/
+ 
 }
 
 

@@ -13,9 +13,9 @@ PImage colMapImage;
 
 void setup() {
   size(mapSize+2*borderSize, mapSize+2*borderSize);
-  woman = new Pac (width/4, height/4, gridSize, speed);
+  woman = new Pac (width/2, height/2, gridSize, speed);
   maze = new Maze (width/2, height/2, 30, 10);
-  colMapImage = loadImage("level_image3.jpg");
+  colMapImage = loadImage("level_image9.jpg");
   collisionArray();
   makeFoods();
 }
@@ -35,7 +35,7 @@ void makeFoods() {
 void collisionArray() {
   collisionMap = new boolean[width][height];
   color black = color(0);
-  color wall = color(#009B95);
+  color wall = color(0,155,149);
 
   //check the colour of each pixel in collisionMap and assign collisionMap boolean true or false
   for (int i = 0; i<width; i++) {

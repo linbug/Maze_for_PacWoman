@@ -25,11 +25,10 @@ class Pac {
         bottomLip = 7*PI/6; 
         topLip = 17*PI/6;
         notBlocked = collisionMap[int(circleX -gridSize)][int(circleY)];
-          if (notBlocked) {
+        if (notBlocked) {
           circleX-=gridSpacing;
         }
-      } 
-      else if (keyCode == RIGHT) {
+      } else if (keyCode == RIGHT) {
         topLip = 11*PI/6; 
         bottomLip = PI/6;
         notBlocked = collisionMap[int(circleX +gridSize)][int(circleY)];
@@ -43,25 +42,22 @@ class Pac {
         bottomLip = 10*PI/6; 
         topLip = 20*PI/6; 
         notBlocked = collisionMap[int(circleX)][int(circleY-gridSize)];
-        if (notBlocked){
-         circleY-=gridSpacing; 
+        if (notBlocked) {
+          circleY-=gridSpacing;
         }
-        
-      } 
-      else if (keyCode == DOWN) {
+      } else if (keyCode == DOWN) {
         bottomLip = 2*PI/3; 
         topLip = 14*PI/6;
         notBlocked = collisionMap[int(circleX)][int(circleY+gridSize)];
-        if (notBlocked){
-        circleY+=gridSpacing;
-      }
+        if (notBlocked) {
+          circleY+=gridSpacing;
+        }
       }
     }
 
     if (collisionMap [int (circleX)][int(circleY)] == true) {
       println ("no wall");
-    } 
-    else {
+    } else {
       println ("wall");
     }
   }

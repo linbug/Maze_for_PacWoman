@@ -58,18 +58,14 @@ void makeEnemies() {
   enemies = new Enemy[numEnemies];  //create the array
   for (int i = 0; i< numEnemies; i++) {
     enemies [i] = new Enemy();
-  }   //create each object in the array
-  for (int i = 0; i< numEnemies; i++) {
-    //enemies[i].start(random(0, width), random(0, height));
-    enemies[i].display(); 
     enemies[i].start(random(0, width), random(0, height));
-
-    //enemies[i].move();
   }
 }
 
 
+
 void draw() {
+  
   noStroke();
   background(255);
   fill(0);
@@ -77,29 +73,24 @@ void draw() {
   image (colMapImage, 0, 0); 
   counter += 0.15;
 
-  for (int i=0; i<foods.size (); i++) {
-    Food myFood = (Food)foods.get(i);
-    myFood.display();
-  }
-
-  // maze.display();
+  displayFoods();
   woman.display();
   woman.move();
   woman.isonMap();
   checkIsFoodEaten();
+  drawEnemies();
   drawScore();
+  
 }
 
 
-void drawScore() {
-  fill(0);
-  if (foods.size() == 0) {
-    fill(255);
-    text("You win!", width/2, height/2);
-  } else {
-    text("Your score is " + score, width - 150, height - borderSize/4);
+void displayFoods() {
+  for (int i=0; i<foods.size (); i++) {
+    Food myFood = (Food)foods.get(i);
+    myFood.display();
   }
 }
+
 
 void checkIsFoodEaten() {
 
@@ -115,4 +106,24 @@ void checkIsFoodEaten() {
     }
   }
 }
+
+
+
+//Draw enemies on map
+void drawEnemies() {
+  for (int i = 0; i< numEnemies; i++) { 
+    enemies[i].display();
+  }
+}
+
+void drawScore() {
+  fill(0);
+  if (foods.size() == 0) {
+    fill(255);
+    text("You win!", width/2, height/2);
+  } else {
+    text("Your score is " + score, width - 150, height - borderSize/4);
+  }
+}
+
 

@@ -1,6 +1,6 @@
 class Pac {
   int gridSpacing; 
-  float circleWidth = 20, 
+  float circleWidth = 21, 
   circleX, 
   circleY, 
   bottomLip=PI/6, 

@@ -1,8 +1,8 @@
 int mapSize = 500, 
-speed = 2, 
+speed = 12, 
 score = 0, 
 numFood, 
-gridSize = 10, 
+gridSize = 24, 
 borderSize = 50;
 float counter = 1;
 Pac woman;
@@ -13,10 +13,12 @@ PImage colMapImage;
 Enemy [] enemies; //Enemy is the object, enemies is the array
 int numEnemies = 5;
 
+
 void setup() {
   size(mapSize+2*borderSize, mapSize+2*borderSize);
   woman = new Pac (width/2, height/2, gridSize, speed);
   maze = new Maze (width/2, height/2, 30, 10);
+  
   colMapImage = loadImage("level_image9.jpg");
   collisionArray();
   makeFoods();
@@ -67,12 +69,12 @@ void makeEnemies() {
 void draw() {
   
   noStroke();
-  background(255);
-  fill(0);
+  background(0);
+  fill(255);
   rect(borderSize-20, borderSize-20, mapSize+40, mapSize+40);
   image (colMapImage, 0, 0); 
   counter += 0.15;
-
+  
   displayFoods();
   woman.display();
   woman.move();
@@ -80,7 +82,7 @@ void draw() {
   checkIsFoodEaten();
   drawEnemies();
   drawScore();
-  
+  maze.makeMaze();
 }
 
 

@@ -1,12 +1,12 @@
 class Pac {
   int gridSpacing; 
-  float circleWidth = 21, 
+  float circleWidth = gridSize - 5, 
   circleX, 
   circleY, 
   bottomLip=PI/6, 
   topLip = 11*PI/6;
   boolean 
-    notBlocked = false;
+    notBlocked = true;
 
   Pac (float x, float y, int z, int speed) {
     circleX = x; 
@@ -15,7 +15,7 @@ class Pac {
   }
 
   void display() {
-    fill(255);
+    fill(#FF4C00);
     arc (circleX, circleY, circleWidth, circleWidth, bottomLip+0.55*sin(counter), topLip-0.55*sin(counter));
   }
 
@@ -24,14 +24,14 @@ class Pac {
       if (keyCode == LEFT) {
         bottomLip = 7*PI/6; 
         topLip = 17*PI/6;
-        notBlocked = collisionMap[int(circleX -gridSize)][int(circleY)];
+        //notBlocked = collisionMap[int(circleX -gridSize)][int(circleY)];
         if (notBlocked) {
           circleX-=gridSpacing;
         }
       } else if (keyCode == RIGHT) {
         topLip = 11*PI/6; 
         bottomLip = PI/6;
-        notBlocked = collisionMap[int(circleX +gridSize)][int(circleY)];
+        //notBlocked = collisionMap[int(circleX +gridSize)][int(circleY)];
         if (notBlocked) {
           circleX+=gridSpacing;
         }
@@ -41,25 +41,21 @@ class Pac {
       if (keyCode == UP) {
         bottomLip = 10*PI/6; 
         topLip = 20*PI/6; 
-        notBlocked = collisionMap[int(circleX)][int(circleY-gridSize)];
+        //notBlocked = collisionMap[int(circleX)][int(circleY-gridSize)];
         if (notBlocked) {
           circleY-=gridSpacing;
         }
       } else if (keyCode == DOWN) {
         bottomLip = 2*PI/3; 
         topLip = 14*PI/6;
-        notBlocked = collisionMap[int(circleX)][int(circleY+gridSize)];
+        //notBlocked = collisionMap[int(circleX)][int(circleY+gridSize)];
         if (notBlocked) {
           circleY+=gridSpacing;
         }
       }
     }
 
-    if (collisionMap [int (circleX)][int(circleY)] == true) {
-      println ("no wall");
-    } else {
-      println ("wall");
-    }
+    
   }
   void isonMap() {
     if (circleX > mapSize+borderSize) {

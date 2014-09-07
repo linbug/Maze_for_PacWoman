@@ -1,48 +1,31 @@
-class Maze {
-  
-  float x, y, blockWidth, blockHeight;
-  
-  int [][] MazeArray;
-  
-  Maze (float xpos, float ypos, float widthValue, float heightValue)  {
-    MazeArray = new int [5][5];
-    MazeArray[0] = new int[] { 1,1,1,1,1};
-    MazeArray[1] = new int[] { 1,0,1,0,1};
-    MazeArray[2] = new int[] { 1,0,1,0,1};
-    MazeArray[3] = new int[] { 1,0,0,0,1};
-    MazeArray[4] = new int[] { 1,1,1,1,1};
-  }
+void makeMaze(){
+    mazeArray = new int [15][15];
+    mazeArray[0] = new int[] { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    mazeArray[1] = new int[] { 1,0,1,0,1,1,0,1,0,1,1,1,1,1,1};
+    mazeArray[2] = new int[] { 1,0,1,0,1,1,0,1,0,1,1,1,1,1,1};
+    mazeArray[3] = new int[] { 1,0,0,0,1,1,0,0,0,1,1,1,1,1,1};
+    mazeArray[4] = new int[] { 1,1,1,1,1,1,0,1,1,1,1,1,1,1,1};
+    mazeArray[5] = new int[] { 1,1,1,1,1,1,0,0,1,1,1,1,1,1,1};
+    mazeArray[6] = new int[] { 1,1,1,1,1,1,1,0,1,1,1,1,1,1,1};
+    mazeArray[7] = new int[] { 1,1,1,1,1,0,0,0,1,0,1,1,1,1,1};
+    mazeArray[8] = new int[] { 1,1,1,1,1,0,1,1,1,0,1,1,1,1,1};
+    mazeArray[9] = new int[] { 1,1,1,1,0,0,1,1,1,0,1,1,1,1,1};
+    mazeArray[10] = new int[] { 1,1,1,1,0,1,1,1,1,0,1,1,1,1,1};
+    mazeArray[11] = new int[] { 1,1,1,1,0,1,1,0,0,0,0,1,1,1,1};
+    mazeArray[12] = new int[] { 1,1,1,1,0,0,0,0,1,1,1,1,1,1,1};
+    mazeArray[13] = new int[] { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    mazeArray[14] = new int[] { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
     
-    void makeMaze() {
- //fill (#FF0000);
-  //      ellipse(50, 50, 20, 20);
-  for (int i = 0; i <= 4 ; i++) {
+    for (int i = 0; i <= 14 ; i++) {
     
-    for (int j = 0; j <= 4 ; j++) {
-      print (MazeArray[i][j]);
-      if (MazeArray[i][j] == 1) {
-        fill (#FF0000);
-        ellipse(i*gridSize, j*gridSize, 20, 20);
+    for (int j = 0; j <= 14 ; j++) {
+      
+      if (mazeArray[i][j] == 1) {
+        fill (#00AF69);
+        rectMode(CORNER);
+        rect(borderSize+(gridSize*i), borderSize+(gridSize*j), gridSize, gridSize);
         
       }
     }
   }
 }
-   /* x = xpos;
-    y = ypos;
-    blockWidth = widthValue;
-    blockHeight = heightValue;
-  }
-  
-  void display(){
-    fill (#009B95);
-    rect (x, y, blockWidth, blockHeight);
-    */
-    
-    
-    
-  
-}
-
-
-

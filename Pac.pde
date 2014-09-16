@@ -1,22 +1,26 @@
 class Pac {
-  int gridSpacing; 
+  int gridSpacing, 
+  gridX, 
+  gridY; 
+  
   float circleWidth = gridSize - 5, 
-  circleX, 
-  circleY, 
+
   bottomLip=PI/6, 
   topLip = 11*PI/6;
   boolean 
     notBlocked = true;
 
-  Pac (float x, float y, int z, int speed) {
-    circleX = x; 
-    circleY = y;
+  Pac (int x, int y, int z, int speed) {
+    gridX = x; 
+    print(gridX);
+    gridY = y;
     gridSpacing = z;
   }
 
   void display() {
     fill(#FF4C00);
-    arc (circleX, circleY, circleWidth, circleWidth, bottomLip+0.55*sin(counter), topLip-0.55*sin(counter));
+    ellipseMode(CORNER);
+    arc (borderSize+2.5+ (gridSize*gridX), borderSize+2.5+(gridSize*gridY), circleWidth, circleWidth, bottomLip+0.55*sin(counter), topLip-0.55*sin(counter));
   }
 
   void move() {
@@ -24,52 +28,74 @@ class Pac {
       if (keyCode == LEFT) {
         bottomLip = 7*PI/6; 
         topLip = 17*PI/6;
-        //notBlocked = collisionMap[int(circleX -gridSize)][int(circleY)];
+        if (mazeArray[gridY][gridX-1] == 0) {
+          notBlocked = true;
+        } else {
+          notBlocked = false;
+        }
+        //notBlocked = collisionMap[int(gridX -gridSize)][int(gridY)];
         if (notBlocked) {
-          circleX-=gridSpacing;
+          gridX-=1;
         }
       } else if (keyCode == RIGHT) {
         topLip = 11*PI/6; 
         bottomLip = PI/6;
-        //notBlocked = collisionMap[int(circleX +gridSize)][int(circleY)];
+        if (mazeArray[gridY][gridX+1] == 0) {
+          notBlocked = true;
+        } else {
+          notBlocked = false;
+        }
+        //notBlocked = collisionMap[int(gridX +gridSize)][int(gridY)];
         if (notBlocked) {
-          circleX+=gridSpacing;
+          gridX+=1;
         }
       }
     }
     if (keyPressed && (key ==CODED)) {
       if (keyCode == UP) {
         bottomLip = 10*PI/6; 
-        topLip = 20*PI/6; 
-        //notBlocked = collisionMap[int(circleX)][int(circleY-gridSize)];
+        topLip = 20*PI/6;
+        if (mazeArray[gridY-1][gridX] == 0) {
+          notBlocked = true;
+        } else {
+          notBlocked = false;
+        }
+        //notBlocked = collisionMap[int(gridX)][int(gridY-gridSize)];
         if (notBlocked) {
-          circleY-=gridSpacing;
+          gridY-=1;
         }
       } else if (keyCode == DOWN) {
         bottomLip = 2*PI/3; 
         topLip = 14*PI/6;
-        //notBlocked = collisionMap[int(circleX)][int(circleY+gridSize)];
+        if (mazeArray[gridY+1][gridX] == 0) {
+          notBlocked = true;
+        } else {
+          notBlocked = false;
+        }
+        //notBlocked = collisionMap[int(gridX)][int(gridY+gridSize)];
         if (notBlocked) {
-          circleY+=gridSpacing;
+          gridY+=1;
         }
       }
+      delay(200);
     }
+   
+  }
+  /*void isonMap() {
+   if (gridX > mapSize+borderSize) {
+   gridX = borderSize;
+   }
+   if (gridY > mapSize+borderSize) {
+   gridY = borderSize;
+   }
+   if (gridX < borderSize) {
+   gridX = width - borderSize;
+   }
+   if (gridY < borderSize) {
+   gridY = height - borderSize;
+   }
+   }*/
 
-    
-  }
-  void isonMap() {
-    if (circleX > mapSize+borderSize) {
-      circleX = borderSize;
-    }
-    if (circleY > mapSize+borderSize) {
-      circleY = borderSize;
-    }
-    if (circleX < borderSize) {
-      circleX = width - borderSize;
-    }
-    if (circleY < borderSize) {
-      circleY = height - borderSize;
-    }
-  }
+  //might use later for something
 }
 

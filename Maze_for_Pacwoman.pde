@@ -15,20 +15,34 @@ int numEnemies = 5;
 
 
 void setup() {
+  noStroke();
+  background(0);
+  fill(255);
+  rect(borderSize-20, borderSize-20, mapSize+40, mapSize+40);
   size(mapSize+2*borderSize, mapSize+2*borderSize);
-  woman = new Pac (width/2, height/2, gridSize, speed);
+  woman = new Pac (1, 1, gridSize, speed);
   colMapImage = loadImage("level_image9.jpg");
   //collisionArray();
+  mazeArray = loadMaze();
   makeFoods();
   makeEnemies();
+  
+  
 }
 
 void makeFoods() {
   foods = new ArrayList<Food>();
-  for (int x = borderSize; x<mapSize+borderSize; x+= gridSize) {
+  for (int i = 0; i <= 14 ; i++) {
+    
+    for (int j = 0; j <= 14 ; j++) {
+      
+      if (mazeArray[j][i] == 0) {
+  
+        /*for (int x = borderSize; x<mapSize+borderSize; x+= gridSize) {
     for (int y = borderSize; y< mapSize+borderSize; y+= gridSize) {
-      if ((random(10)<4) /*&& (collisionMap[x][y]==true)*/) {
-        foods.add(new Food(x, y));
+      if ((random(10)<4) /*&& (collisionMap[x][y]==true)) */
+        
+        foods.add(new Food(borderSize + gridSize/2+ (i*gridSize), borderSize + gridSize/2+ (j*gridSize)));
       }
     }
   }
@@ -66,18 +80,17 @@ void makeEnemies() {
 
 void draw() {
 
+  //image (colMapImage, 0, 0); 
+  counter += 0.15;
   noStroke();
   background(0);
   fill(255);
   rect(borderSize-20, borderSize-20, mapSize+40, mapSize+40);
-  //image (colMapImage, 0, 0); 
-  counter += 0.15;
-
   makeMaze();
   displayFoods();
   woman.display();
   woman.move();
-  woman.isonMap();
+  //woman.isonMap();
   checkIsFoodEaten();
   drawEnemies();
   drawScore();
@@ -97,10 +110,10 @@ void checkIsFoodEaten() {
 
   for (int i=0; i<foods.size (); i++) {
     Food myFood = (Food)foods.get(i);
-    if (myFood.x < (woman.circleX + woman.circleWidth/4) && 
-      myFood.x > (woman.circleX - woman.circleWidth/4) &&
-      myFood.y < (woman.circleY + woman.circleWidth/4) && 
-      myFood.y > (woman.circleY - woman.circleWidth/4)) {
+    if (myFood.x < (woman.gridX + woman.circleWidth/4) && 
+      myFood.x > (woman.gridX - woman.circleWidth/4) &&
+      myFood.y < (woman.gridY + woman.circleWidth/4) && 
+      myFood.y > (woman.gridY - woman.circleWidth/4)) {
       foods.remove(i);
       score++;
       break;

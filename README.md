@@ -1,4 +1,4 @@
 Maze_for_PacWoman
 =================
 
-Sketch for testing maze creation
+A PacWoman game, programmed in Processing. 

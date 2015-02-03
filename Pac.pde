@@ -19,8 +19,8 @@ class Pac {
 
   void display() {
     fill(#FF4C00);
-    ellipseMode(CORNER);
-    arc (borderSize+2.5+ (gridSize*gridX), borderSize+2.5+(gridSize*gridY), circleWidth, circleWidth, bottomLip+0.55*sin(counter), topLip-0.55*sin(counter));
+    ellipseMode(CENTER);
+    arc (borderSize+gridSize/2+ (gridSize*gridX), borderSize+ gridSize/2+(gridSize*gridY), circleWidth, circleWidth, bottomLip+0.55*sin(counter), topLip-0.55*sin(counter));
   }
 
   void move() {
@@ -28,15 +28,18 @@ class Pac {
       if (keyCode == LEFT) {
         bottomLip = 7*PI/6; 
         topLip = 17*PI/6;
+        
         if (mazeArray[gridY][gridX-1] == 0) {
           notBlocked = true;
         } else {
           notBlocked = false;
         }
         //notBlocked = collisionMap[int(gridX -gridSize)][int(gridY)];
+        
         if (notBlocked) {
           gridX-=1;
         }
+        
       } else if (keyCode == RIGHT) {
         topLip = 11*PI/6; 
         bottomLip = PI/6;
@@ -51,6 +54,7 @@ class Pac {
         }
       }
     }
+    
     if (keyPressed && (key ==CODED)) {
       if (keyCode == UP) {
         bottomLip = 10*PI/6; 

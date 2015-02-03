@@ -41,7 +41,7 @@ void makeFoods() {
         /*for (int x = borderSize; x<mapSize+borderSize; x+= gridSize) {
     for (int y = borderSize; y< mapSize+borderSize; y+= gridSize) {
       if ((random(10)<4) /*&& (collisionMap[x][y]==true)) */
-        
+        ellipseMode(CENTER);
         foods.add(new Food(borderSize + gridSize/2+ (i*gridSize), borderSize + gridSize/2+ (j*gridSize)));
       }
     }
@@ -110,10 +110,12 @@ void checkIsFoodEaten() {
 
   for (int i=0; i<foods.size (); i++) {
     Food myFood = (Food)foods.get(i);
-    if (myFood.x < (woman.gridX + woman.circleWidth/4) && 
-      myFood.x > (woman.gridX - woman.circleWidth/4) &&
-      myFood.y < (woman.gridY + woman.circleWidth/4) && 
-      myFood.y > (woman.gridY - woman.circleWidth/4)) {
+        
+    if (myFood.x < (woman.gridX + woman.circleWidth) && 
+      myFood.x > (woman.gridX - woman.circleWidth) &&
+      myFood.y < (woman.gridY + woman.circleWidth) && 
+      myFood.y > (woman.gridY - woman.circleWidth)) {
+      
       foods.remove(i);
       score++;
       break;

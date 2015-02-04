@@ -7,12 +7,10 @@ class Pac {
 
   bottomLip=PI/6, 
   topLip = 11*PI/6;
-  boolean 
-    notBlocked = true;
+  boolean notBlocked = true;
 
   Pac (int x, int y, int z, int speed) {
     gridX = x; 
-    print(gridX);
     gridY = y;
     gridSpacing = z;
   }

@@ -1,15 +1,15 @@
 class Food {
-  float x, y;
+  float gridX, gridY;
   float foodDiameter = 4;
 
-  Food(float xpos, float ypos) {
-    x = xpos;
-    y = ypos;
+  Food(float x, float y) {
+    gridX = x;
+    gridY = y;
   }
 
   void display() {
     fill (#E60042);
-    ellipse (x, y, foodDiameter, foodDiameter);
+    ellipse (borderSize + gridSize/2+ (gridX*gridSize),  borderSize+ gridSize/2+(gridY*gridSize), foodDiameter, foodDiameter);
   }
 }
 

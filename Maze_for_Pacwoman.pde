@@ -1,5 +1,4 @@
 int mapSize = 450, 
-speed = 15, 
 score = 0, 
 numFood, 
 gridSize = 30, 
@@ -18,7 +17,7 @@ void setup() {
   fill(255);
   rect(borderSize-20, borderSize-20, mapSize+40, mapSize+40);
   size(mapSize+2*borderSize, mapSize+2*borderSize);
-  woman = new Pac (1, 1, gridSize, speed);
+  woman = new Pac (1, 1, gridSize);
   mazeArray = loadMaze();
   makeFoods();
   makeEnemies();

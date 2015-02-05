@@ -9,7 +9,7 @@ class Pac {
   topLip = 11*PI/6;
   boolean notBlocked = true;
 
-  Pac (int x, int y, int z, int speed) {
+  Pac (int x, int y, int z) {
     gridX = x; 
     gridY = y;
     gridSpacing = z;
@@ -18,7 +18,11 @@ class Pac {
   void display() {
     fill(#FF4C00);
     ellipseMode(CENTER);
+    if (keyPressed && (key == CODED)) {
+      arc (borderSize+gridSize/2+ (gridSize*gridX), borderSize+ gridSize/2+(gridSize*gridY), circleWidth, circleWidth, bottomLip, topLip);
+    } else {
     arc (borderSize+gridSize/2+ (gridSize*gridX), borderSize+ gridSize/2+(gridSize*gridY), circleWidth, circleWidth, bottomLip+0.55*sin(counter), topLip-0.55*sin(counter));
+  }
   }
 
   void move() {
@@ -62,7 +66,7 @@ class Pac {
         } else {
           notBlocked = false;
         }
-        //notBlocked = collisionMap[int(gridX)][int(gridY-gridSize)];
+        
         if (notBlocked) {
           gridY-=1;
         }
@@ -74,7 +78,7 @@ class Pac {
         } else {
           notBlocked = false;
         }
-        //notBlocked = collisionMap[int(gridX)][int(gridY+gridSize)];
+        
         if (notBlocked) {
           gridY+=1;
         }
@@ -83,21 +87,6 @@ class Pac {
     }
    
   }
-  /*void isonMap() {
-   if (gridX > mapSize+borderSize) {
-   gridX = borderSize;
-   }
-   if (gridY > mapSize+borderSize) {
-   gridY = borderSize;
-   }
-   if (gridX < borderSize) {
-   gridX = width - borderSize;
-   }
-   if (gridY < borderSize) {
-   gridY = height - borderSize;
-   }
-   }*/
-
-  //might use later for something
+  
 }
 

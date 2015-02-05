@@ -92,11 +92,14 @@ void drawEnemies() {
 }
 
 void drawScore() {
-  fill(255);
+  textSize(20);
+  fill(0);
   if (foods.size() == 0) {
-    fill(255);
-    text("You win!", width/2, height/2);
-  } else {
+    
+    text("You win!", width/2 - 25, height - borderSize/4);
+  } else 
+  {
+    textSize(12);
     text("Your score is " + score, width - 150, height - borderSize/4);
   }
 }

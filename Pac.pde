@@ -16,7 +16,7 @@ class Pac {
   }
 
   void display() {
-    fill(#FF4C00);
+    fill(255);
     ellipseMode(CENTER);
     if (keyPressed && (key == CODED)) {
       arc (borderSize+gridSize/2+ (gridSize*gridX), borderSize+ gridSize/2+(gridSize*gridY), circleWidth, circleWidth, bottomLip, topLip);

@@ -10,10 +10,11 @@ ArrayList foods;
 Enemy [] enemies; //Enemy is the object, enemies is the array
 int numEnemies = 5;
 
+
 void setup() {
+  surface.setSize(mapSize+2*borderSize, mapSize+2*borderSize);
   noStroke();
   rect(borderSize-20, borderSize-20, mapSize+40, mapSize+40);
-  size(mapSize+2*borderSize, mapSize+2*borderSize);
   woman = new Pac (1, 1, gridSize);
   mazeArray = loadMaze();
   makeFoods();
@@ -46,7 +47,7 @@ void makeEnemies() {
 
 
 void draw() {
-
+  
   counter += 0.15;
   noStroke();
   background(#ef1d74);
@@ -103,4 +104,3 @@ void drawScore() {
     text("Your score is " + score, width - 150, height - borderSize/4);
   }
 }
-

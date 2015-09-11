@@ -10,6 +10,153 @@ ArrayList foods;
 Enemy [] enemies; //Enemy is the object, enemies is the array
 int numEnemies = 5;
 
+//////////////////////////////////classes
+
+int[][] loadMaze() {
+    
+    mazeArray = new int [15][15];
+    mazeArray[0] = new int[] { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    mazeArray[1] = new int[] { 1,0,1,0,1,1,0,1,0,1,1,1,1,1,1};
+    mazeArray[2] = new int[] { 1,0,1,0,0,0,0,1,0,0,0,0,0,0,1};
+    mazeArray[3] = new int[] { 1,0,0,0,1,1,0,0,0,1,1,1,1,0,1};
+    mazeArray[4] = new int[] { 1,1,1,1,1,1,0,1,1,1,1,1,1,0,1};
+    mazeArray[5] = new int[] { 1,1,1,1,1,1,0,0,1,1,1,0,0,0,1};
+    mazeArray[6] = new int[] { 1,1,1,1,1,1,1,0,1,1,1,1,0,1,1};
+    mazeArray[7] = new int[] { 1,1,1,1,1,0,0,0,1,0,1,1,0,1,1};
+    mazeArray[8] = new int[] { 1,1,1,1,1,0,1,1,1,0,1,1,0,1,1};
+    mazeArray[9] = new int[] { 1,1,1,1,0,0,1,1,1,0,1,1,0,1,1};
+    mazeArray[10] = new int[] { 1,1,1,1,0,1,1,1,1,0,1,0,0,1,1};
+    mazeArray[11] = new int[] { 1,1,1,1,0,1,1,0,0,0,0,0,1,1,1};
+    mazeArray[12] = new int[] { 1,1,1,1,0,0,0,0,1,1,1,1,1,1,1};
+    mazeArray[13] = new int[] { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    mazeArray[14] = new int[] { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    
+    return mazeArray;
+}
+
+class Food {
+  float gridX, gridY;
+  float foodDiameter = 4;
+
+  Food(float x, float y) {
+    gridX = x;
+    gridY = y;
+  }
+
+  void display() {
+    fill (#E60042);
+    ellipse (borderSize + gridSize/2+ (gridX*gridSize),  borderSize+ gridSize/2+(gridY*gridSize), foodDiameter, foodDiameter);
+  }
+}
+
+class Pac {
+  int gridSpacing, 
+  gridX, 
+  gridY; 
+
+  float circleWidth = gridSize - 5, 
+
+  bottomLip=PI/6, 
+  topLip = 11*PI/6;
+  boolean notBlocked = true;
+  
+  Pac (int x, int y, int z) {
+    gridX = x; 
+    gridY = y;
+    gridSpacing = z;
+  }
+
+  void display() {
+      fill(255);                 
+      ellipseMode(CENTER);
+      if (keyPressed && (key == CODED)) {
+        arc (borderSize+gridSize/2+ (gridSize*gridX), borderSize+ gridSize/2+(gridSize*gridY), circleWidth, circleWidth, bottomLip, topLip);
+      } else {
+        arc (borderSize+gridSize/2+ (gridSize*gridX), borderSize+ gridSize/2+(gridSize*gridY), circleWidth, circleWidth, bottomLip+0.55*sin(counter), topLip-0.55*sin(counter));
+      }
+    }
+  
+  
+  void move() {
+    if (keyPressed && (key == CODED)) {
+      if (keyCode == LEFT) {
+        bottomLip = 7*PI/6; 
+        topLip = 17*PI/6;
+
+        if (mazeArray[gridY][gridX-1] == 0) {
+          notBlocked = true;
+        } else {
+          notBlocked = false;
+        }
+        //notBlocked = collisionMap[int(gridX -gridSize)][int(gridY)];
+
+        if (notBlocked) {
+          gridX-=1;
+        }
+      } else if (keyCode == RIGHT) {
+        topLip = 11*PI/6; 
+        bottomLip = PI/6;
+        if (mazeArray[gridY][gridX+1] == 0) {
+          notBlocked = true;
+        } else {
+          notBlocked = false;
+        }
+        //notBlocked = collisionMap[int(gridX +gridSize)][int(gridY)];
+        if (notBlocked) {
+          gridX+=1;
+        }
+      }
+    }
+
+    if (keyPressed && (key ==CODED)) {
+      if (keyCode == UP) {
+        bottomLip = 10*PI/6; 
+        topLip = 20*PI/6;
+        if (mazeArray[gridY-1][gridX] == 0) {
+          notBlocked = true;
+        } else {
+          notBlocked = false;
+        }
+
+        if (notBlocked) {
+          gridY-=1;
+        }
+      } else if (keyCode == DOWN) {
+        bottomLip = 2*PI/3; 
+        topLip = 14*PI/6;
+        if (mazeArray[gridY+1][gridX] == 0) {
+          notBlocked = true;
+        } else {
+          notBlocked = false;
+        }
+
+        if (notBlocked) {
+          gridY+=1;
+        }
+      }
+      delay(200);
+    }
+  }
+}
+
+
+class Enemy {
+  int squareWidth = 10;
+  float squareX, 
+  squareY;
+
+  void start (float x, float y) {
+    squareX = x;
+    squareY = y;
+  } 
+
+  void display() {
+    fill(255);
+    rect (squareX, squareY, squareWidth, squareWidth);
+  }
+}
+
+////////////////////////////
 
 void setup() {
   surface.setSize(mapSize+2*borderSize, mapSize+2*borderSize);
